@@ -1,0 +1,18 @@
+*{padding: 0px; margin: 0px;}
+#content{width:1024px; margin: 0px auto;}
+#top{background: #cccccc; height: 120px; width: 100%;}
+#left{float: left; height: 600px; padding-left: 20px; width: 120px; border: 1px solid #aaa;}
+#right{float: left; height: 600px;width: 870px;
+    padding-left: 10px; border: 1px solid #aaa;}
+#foot{clear: both;background: #cccccc; height: 120px; width: 100%;}
+
+#t th, #t td{
+    padding: 3px 5px;
+    border-right: 1px solid #ccc ;
+    border-bottom: 1px solid #ccc ;
+}
+#t tr:hover{cursor: pointer;background:#dddddd;}
+#t {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+}

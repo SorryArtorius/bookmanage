@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.j16.dao.StudentDao">
+    <resultMap id="studentMapper" type="student">
+        <association property="grade" column="gradeId" select="com.j16.dao.GradeDao.getGrade"/>
+    </resultMap>
+
+    <select id="selectStudents" resultMap="studentMapper">
+        select  * from student
+    </select>
+</mapper>
