@@ -124,9 +124,8 @@
                         identityCard: identityCard
                     },
                     function (data) {
-                        console.log(data);
-                        alert(data);
                         if (data == true) {
+                            alert("修改成功，正在跳转学生页面");
                             window.location.href="/java16_SSM_816_war/student.html";
                         } else {
                             alert("修改出现异常");

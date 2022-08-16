@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-3.6.0.js"></script>
+    <script>
+        $(function () {
+
+            var tb = $("#tb");
+            $("#tb tr").remove();
+            var str = "";
+
+            /**
+             * 数据添加操作
+             * @type {string}
+             */
+
+
+            str += "<tr>";
+            str += "<td>姓名:</td><td><input type='text' name='studentName' ></td>";
+            str += "</tr>";
+
+
+            str += "<tr>";
+            str += "<td>性别:</td><td><input type='radio' name='sex'  value='男' checked>男" +
+                "<input type='radio' name='sex'  value='女' >女</td>";
+            str += "</tr>";
+
+
+            str += "<tr>";
+            str += "<td>密码:</td><td><input type='text' name='loginPwd'  ></td>";
+            str += "</tr>";
+
+            str += "<tr>";
+            str += "<td>年级:</td>";
+            str += "<td>"
+
+
+            str += "<select id='selectGrade' name='grade'>";
+            str += "<option value='0' selected>请选择相应的年级</option>";
+            str += "</select>";
+
+            str += "</td>";
+            str += "</tr>";
+
+
+            str += "<tr>";
+            str += "<td>电话:</td><td><input type='text' name='phone' ></td>";
+            str += "</tr>";
+
+            str += "<tr>";
+            str += "<td>地址:</td><td><input type='text' name='address'  ></td>";
+            str += "</tr>";
+
+            str += "<tr>";
+            str += "<td>出生日期:</td><td><input type='text' name='bornDate'  ></td>";
+            str += "</tr>";
+
+            str += "<tr>";
+            str += "<td>电子邮箱:</td><td><input type='text' name='email'  ></td>";
+            str += "</tr>";
+
+
+            str += "<tr>";
+            str += "<td>身份证:</td><td><input type='text' name='identityCard' ></td>";
+            str += "</tr>";
+
+            tb.append(str);
+
+            str = "";
+            var selectGrade = $("#selectGrade").val();
+            $.getJSON("/java16_SSM_816_war/grade/getGrades", function (data) {
+                for (i = 0; i < data.length; i++) {
+                    str += "<option value='" + data[i].gradeId + "'>" + data[i].gradeName + "</option>";
+                }
+
+                $("#selectGrade").append(str);
+
+            });
+        });
+        
+        
+        function addStudent() {
+            
+        }
+    </script>
+</head>
+<body>
+<div id="tb">
+</div>
+<input onclick="addStudent();" type='submit' value='添加'/>
+</body>
+</body>
+</html>
