@@ -22,4 +22,11 @@ public interface StudentService {
      * @return
      */
     List<Student> fuzzyQueryStudent(Map map);
+
+
+    Student selectEditStudent(int studentNo);
+
+
+    int updateStudent(int studentNo,String studentName,String loginPwd,String sex,Integer grade,String phone
+            ,String address,String bornDate,String email,String identityCard);
 }

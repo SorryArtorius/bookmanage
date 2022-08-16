@@ -6,11 +6,10 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.j16.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -73,5 +72,35 @@ public class StudentController {
         return JSON.toJSONString(studentService.fuzzyQueryStudent(map), SerializerFeature.DisableCircularReferenceDetect);
     }
 
+    @GetMapping("editStudent/{studentNo}")
+    public ModelAndView editStudent(@PathVariable("studentNo") Integer studentNo, HttpServletRequest request) {
+        request.getSession().setAttribute("studentNo", studentNo);
+        return new ModelAndView("editStudent");
+    }
 
+
+    @GetMapping("selectEditStudent")
+    @ResponseBody
+    public String selectEditStudent(HttpServletRequest request) {
+        Integer studentNo = (Integer) request.getSession().getAttribute("studentNo");
+        return JSON.toJSONString(studentService.selectEditStudent(studentNo));
+    }
+
+    @PostMapping("updateStudent")
+    @ResponseBody
+    public String updateStudent(@RequestParam("studentNo") Integer studentNo, @RequestParam("studentName") String studentName
+            , @RequestParam("loginPwd") String loginPwd, @RequestParam("sex") String sex
+            , @RequestParam("grade") Integer grade, @RequestParam("phone") String phone
+            , @RequestParam("address") String address, @RequestParam("bornDate") String bornDate
+            , @RequestParam("email") String email, @RequestParam("identityCard") String identityCard) {
+
+
+        if (studentService.updateStudent(studentNo, studentName, loginPwd, sex, grade, phone
+                , address, bornDate, email, identityCard) > 0) {
+            return "true";
+        } else {
+            return "false";
+        }
+
+    }
 }

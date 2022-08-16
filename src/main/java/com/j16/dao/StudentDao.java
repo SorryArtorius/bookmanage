@@ -16,4 +16,10 @@ public interface StudentDao {
 
 
     List<Student> fuzzyQueryStudent(Map map);
+
+
+    Student selectEditStudent(int studentNo);
+
+
+    int updateStudent(Student student);
 }

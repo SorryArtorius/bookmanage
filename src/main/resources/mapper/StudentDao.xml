@@ -28,15 +28,35 @@
             </foreach>
         </where>
     </delete>
-    
+
     <select id="fuzzyQueryStudent" resultMap="studentMapper" parameterType="map">
-        select * from student <where>
-        <if test="gradeId!=0">
-             gradeId=#{gradeId}
-        </if>
-        <if test="studentName!=''">
-            and studentName like concat('%',#{studentName},'%')
-        </if>
-    </where>
+        select * from student
+        <where>
+            <if test="gradeId != 0">
+                gradeId=#{gradeId}
+            </if>
+            <if test="studentName != ''">
+                and studentName like concat('%',#{studentName},'%')
+            </if>
+        </where>
     </select>
+
+    <select id="selectEditStudent" parameterType="int" resultMap="studentMapper">
+        select * from student
+        <where>
+            studentNo =#{studentNo}
+        </where>
+    </select>
+
+    <update id="updateStudent" parameterType="student">
+        update student
+        <set>
+            studentName=#{studentName},loginPwd=#{loginPwd},
+            sex=#{sex},gradeId=#{grade.gradeId},phone=#{phone},address=#{address},
+            bornDate=#{bornDate},email=#{email},identityCard=#{identityCard}
+        </set>
+        <where>
+            studentNo=#{studentNo}
+        </where>
+    </update>
 </mapper>

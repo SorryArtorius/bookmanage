@@ -49,7 +49,7 @@
 
                     str += "<td>" + json.list[i].identityCard + "</td>";
 
-                    str += "<td><a href='#'>编 辑</a>|<a href='#' onclick='return selectDelete(" + json.list[i].studentNo + ");'>删 除</a>";
+                    str += "<td><a href='/java16_SSM_816_war/student/editStudent/"+json.list[i].studentNo + "'>编 辑</a>|<a href='#' onclick='return selectDelete(" + json.list[i].studentNo + ");'>删 除</a>";
 
                 }
 
@@ -201,7 +201,7 @@
 
                     str += "<td>" + json[i].identityCard + "</td>";
 
-                    str += "<td><a href='#'>编 辑</a>|<a href='#' onclick='return selectDelete(" + json[i].studentNo + ");'>删 除</a>";
+                    str += "<td><a href='/java16_SSM_816_war/student/editStudent/" + json[i].studentNo + "'>编 辑</a>|<a href='#' onclick='return selectDelete(" + json[i].studentNo + ");'>删 除</a>";
 
                 }
 
