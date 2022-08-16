@@ -6,6 +6,8 @@ import com.j16.service.GradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class GradeServiceImpl implements GradeService {
 
@@ -14,5 +16,9 @@ public class GradeServiceImpl implements GradeService {
 
     public Grade getGrade(int gradeId) {
         return dao.getGrade(gradeId);
+    }
+
+    public List<Grade> getGrades() {
+        return dao.getGrades();
     }
 }

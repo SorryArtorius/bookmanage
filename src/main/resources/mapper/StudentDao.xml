@@ -8,6 +8,35 @@
     </resultMap>
 
     <select id="selectStudents" resultMap="studentMapper">
-        select  * from student
+        select *
+        from student
+    </select>
+
+    <delete id="deleteStudent" parameterType="int">
+        delete from student
+        <where>
+            studentNo = #{studentNo}
+        </where>
+    </delete>
+
+    <delete id="deleteStudents" parameterType="list">
+        delete from student
+        <where>
+            studentNo in
+            <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </where>
+    </delete>
+    
+    <select id="fuzzyQueryStudent" resultMap="studentMapper" parameterType="map">
+        select * from student <where>
+        <if test="gradeId!=0">
+             gradeId=#{gradeId}
+        </if>
+        <if test="studentName!=''">
+            and studentName like concat('%',#{studentName},'%')
+        </if>
+    </where>
     </select>
 </mapper>
