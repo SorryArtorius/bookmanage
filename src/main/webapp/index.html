@@ -3,14 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="/java16_SSM_816_war/css/index.css"/>
+    <script src="/bookmanage_war/js/jquery-3.6.0.js" type="text/javascript"></script>
+    <script>
+
+
+        function init() {
+            initData(1);
+        }
+
+
+        function initData(index) {
+            $.getJSON("/bookmanage_war/book/selectBooks", {index: index}, function (json) {
+                var tb = $("#tb");
+                var str = "";
+                $("#tb tr:gt(0)").remove();
+                for (var i = 0; i < json.list.length; i++) {
+                    str += "<tr>";
+
+
+                    str += "<td>" + json.list[i].name + "</td>";
+
+
+                    str += "<td>" + json.list[i].author + "</td>";
+
+
+                    str += "<td>" + json.list[i].publish + "</td>";
+
+
+                    str += "<td>" + json.list[i].publishdate + "</td>";
+
+                    str += "<td>" + json.list[i].page + "</td>";
+
+
+                    str += "<td>" + json.list[i].price + "</td>";
+
+
+
+
+                    str += "<td>" + json.list[i].concat + "</td>";
+
+                    str += "<td><a href='/bookmanage_war/book/editBooks/" + json.list[i].id + "'>修 改</a>|<a href='#' onclick='return selectDelete(" + json.list[i].id + ");'>删 除</a>";
+
+                }
+
+                tb.append(str);
+
+                str = "";
+                var pagesNext = $("#pagesNext");
+                document.getElementById("pagesNext").innerHTML = "";
+                str += "共" + json.total + "条数据";
+                str += "<button onclick='initData(1)'>首页</button>";
+
+
+                if (json.hasPreviousPage) {
+                    str += "<a href='#' onclick='return initData(" + json.prePage + ")'>上一页</a>";
+                } else {
+                    str += "<a href='#' onclick=' return initData(1)'>上一页</a>";
+                }
+                str += json.pageNum + "/" + json.pages;
+                if (json.hasNextPage) {
+                    str += "<a href='#' onclick='return initData(" + (json.nextPage) + ")'>下一页</a>";
+                } else {
+                    str += "<a href='#' onclick=' return initData(" + json.pages + ")'>下一页</a>";
+                }
+                str += "<button onclick='initData(" + json.pages + ")'>末页</button>";
+                str += "<button onclick='addBook();'>添加书籍</button>";
+                pagesNext.append(str);
+                return false;
+            });
+
+        }
+
+
+        function selectDelete(id) {
+            var r = confirm("您确定删除吗？")
+            if (r == true) {
+                $.getJSON("/bookmanage_war/book/deleteBook", {id: id}, function (json) {
+                    console.log(json);
+                    if (json == true) {
+                        alert("删除成功！");
+                        initData(1);
+                    } else {
+                        alert("删除失败！");
+                    }
+                });
+            }
+        }
+
+        function addBook() {
+            window.location.href="/bookmanage_war/addBook.html";
+        }
+
+
+    </script>
+
 </head>
-<body>
-<div id="content"></div>
-<div id="top"></div>
-<div id="left"></div>
-<div id="right"> <a href="/java16_SSM_816_war/student.html">学生管理</a>
-                <a href="/java16_SSM_816_war/addStudent.html">添加学生</a></div>
-<div id="foot"></div>
+<body onload="init()">
+<table border="1" id="tb">
+    <th>书名</th>
+    <th>作者</th>
+    <th>出版社</th>
+    <th>出版日期</th>
+    <th>页数</th>
+    <th>价格</th>
+    <th>出内容摘要</th>
+    <th>操作</th>
+</table>
+<div id="pagesNext"></div>
 </body>
 </html>

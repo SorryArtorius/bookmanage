@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加书籍</title>
+    <script src="/bookmanage_war/js/jquery-3.6.0.js"></script>
+    <script>
+        function backtrack() {
+            window.location.href = "/bookmanage_war/index.html";
+        }
+
+
+        function verify() {
+            var name = $("input[name='name']").val();
+            var author = $("input[name='author']").val();
+            var publish = $("input[name='publish']").val();
+            var publishdate = $("input[name='publishdate']").val();
+            var page = $("input[name='page']").val();
+            var price = $("input[name='price']").val();
+            var concat = $("input[name='concat']").val();
+            if (name == "") {
+                alert("书名不能为空");
+                return false;
+            }
+            if (author == "") {
+                alert("作者不能为空");
+                return false;
+            }
+            if (publish == "") {
+                alert("出版社不能为空");
+                return false;
+            }
+            if (publishdate == "") {
+                alert("出版日期不能为空");
+                return false;
+            }
+            if (page == "") {
+                alert("页数不能为空");
+                return false;
+            }
+            if (price == "") {
+                alert("价格不能为空");
+                return false;
+            }
+            if (concat == "") {
+                alert("内容摘要不能为空");
+                return false;
+            }
+
+            var timeRegex1 = /^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/;
+
+            if (!timeRegex1.exec(publishdate)) {
+                alert("日期格式错误！");
+                return false;
+            }
+
+        }
+    </script>
+</head>
+<body>
+<form action="/bookmanage_war/book/updateBook" method="post" onsubmit="return verify();">
+    <table>
+        <tr>
+            <td>书名:</td>
+            <td><input name="name" type="text"/></td>
+        </tr>
+        <tr>
+            <td>作者:</td>
+            <td><input name="author" type="text"/></td>
+        </tr>
+        <tr>
+            <td>出版社:</td>
+            <td><input name="publish" type="text"/></td>
+        </tr>
+        <tr>
+            <td>出版日期:</td>
+            <td><input name="publishdate" type="text"/></td>
+        </tr>
+        <tr>
+            <td>页数:</td>
+            <td><input name="page" type="text"/></td>
+        </tr>
+        <tr>
+            <td>价格:</td>
+            <td><input name="price" type="text"/></td>
+        </tr>
+        <tr>
+            <td>内容摘要</td>
+            <td><input name="concat" type="text"/></td>
+        </tr>
+    </table>
+    <input type="submit" value="提交"/>
+    <button onclick="backtrack();" type="button">返回</button>
+</form>
+</body>
+</html>

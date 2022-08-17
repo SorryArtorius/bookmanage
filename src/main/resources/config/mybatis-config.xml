@@ -32,6 +32,6 @@
     <!-- mapping 文件路径配置 -->
     <!--    <mappers>-->
     <!--        <mapper resource="mapper/GradeDao.xml"/>-->
-    <!--        <mapper resource="mapper/StudentDao.xml"/>-->
+    <!--        <mapper resource="mapper/BookDao.xml"/>-->
     <!--    </mappers>-->
 </configuration>
